@@ -41554,7 +41554,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "p-5 bg-dark text-white" }, [
       _c("h1", { staticClass: "display-3" }, [_vm._v("Guest Home Page")]),
       _vm._v(" "),
-      _c("p", { staticClass: "lead" }, [_vm._v("Ciao carissimi")]),
+      _c("p", { staticClass: "lead" }, [_vm._v("We carissimi")]),
       _vm._v(" "),
       _c("hr", { staticClass: "my-2" }),
       _vm._v(" "),
@@ -41591,7 +41591,7 @@ var render = function () {
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "row" }, [
           _c("main", { staticClass: "posts col-12 col-md-9" }, [
-            _c("div", { staticClass: "container py-4" }, [
+            _c("div", { staticClass: "container py-5" }, [
               _c(
                 "div",
                 {
