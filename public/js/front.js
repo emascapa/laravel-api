@@ -5189,6 +5189,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -5198,7 +5246,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: "",
-      postResponse: ''
+      postResponse: "",
+      categories: "",
+      tags: ""
     };
   },
   methods: {
@@ -5213,9 +5263,29 @@ __webpack_require__.r(__webpack_exports__);
           page: postPage
         }
       }).then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         _this.posts = response.data;
         _this.postResponse = response.data; //console.log(this.posts);
+      })["catch"](function (e) {
+        console.error(e);
+      });
+    },
+    getCategories: function getCategories() {
+      var _this2 = this;
+
+      axios.get("/api/categories").then(function (response) {
+        //console.log(response);
+        _this2.categories = response.data;
+      })["catch"](function (e) {
+        console.error(e);
+      });
+    },
+    getTags: function getTags() {
+      var _this3 = this;
+
+      axios.get("/api/tags").then(function (response) {
+        //console.log(response);
+        _this3.tags = response.data;
       })["catch"](function (e) {
         console.error(e);
       });
@@ -5223,6 +5293,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getPosts(1);
+    this.getCategories();
+    this.getTags();
   }
 });
 
@@ -41516,165 +41588,202 @@ var render = function () {
     [
       _c("welcome-page-guest"),
       _vm._v(" "),
-      _c("section", { staticClass: "posts" }, [
-        _c("div", { staticClass: "container py-4" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3",
-            },
-            _vm._l(_vm.postResponse.data, function (post) {
-              return _c("div", { key: post.id, staticClass: "col" }, [
-                _c("div", { staticClass: "card h-100" }, [
-                  _c("img", { attrs: { src: post.image, alt: "" } }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h5", [_vm._v(_vm._s(post.title))]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(post.content))]),
-                  ]),
-                ]),
-              ])
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "pagination mt-5 d-flex justify-content-center" },
-            [
-              _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
-                _c(
-                  "ul",
-                  { staticClass: "pagination" },
-                  [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("main", { staticClass: "posts col-12 col-md-9" }, [
+            _c("div", { staticClass: "container py-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "\n              row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4\n              g-3\n            ",
+                },
+                _vm._l(_vm.postResponse.data, function (post) {
+                  return _c("div", { key: post.id, staticClass: "col" }, [
+                    _c("div", { staticClass: "card h-100" }, [
+                      _c("img", { attrs: { src: post.image, alt: "" } }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h5", [_vm._v(_vm._s(post.title))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(post.content))]),
+                      ]),
+                    ]),
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "pagination mt-5 d-flex justify-content-center",
+                },
+                [
+                  _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
                     _c(
-                      "li",
-                      {
-                        class:
-                          _vm.postResponse.current_page == 1
-                            ? "disabled page-item"
-                            : "page-item",
-                      },
+                      "ul",
+                      { staticClass: "pagination" },
                       [
                         _c(
-                          "a",
+                          "li",
                           {
-                            staticClass: "page-link",
-                            attrs: { href: "#", "aria-label": "Previous" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.getPosts(
-                                  _vm.postResponse.current_page - 1
-                                )
-                              },
-                            },
+                            class:
+                              _vm.postResponse.current_page == 1
+                                ? "disabled page-item"
+                                : "page-item",
                           },
                           [
-                            _c("span", { attrs: { "aria-hidden": "true" } }, [
-                              _vm._v("«"),
-                            ]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "visually-hidden" }, [
-                              _vm._v("Previous"),
-                            ]),
-                          ]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.postResponse.last_page, function (page_num) {
-                      return _c(
-                        "li",
-                        {
-                          key: page_num,
-                          class:
-                            page_num == _vm.postResponse.current_page
-                              ? "page-item active"
-                              : "page-item",
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.getPosts(page_num)
+                            _c(
+                              "a",
+                              {
+                                staticClass: "page-link",
+                                attrs: { href: "#", "aria-label": "Previous" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.getPosts(
+                                      _vm.postResponse.current_page - 1
+                                    )
+                                  },
                                 },
                               },
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(page_num) +
-                                  "\n                            "
-                              ),
-                            ]
-                          ),
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        class:
-                          _vm.postResponse.current_page ==
-                          _vm.postResponse.last_page
-                            ? "disabled page-item"
-                            : "page-item",
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "page-link",
-                            attrs: { href: "#", "aria-label": "Next" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.getPosts(
-                                  _vm.postResponse.current_page + 1
-                                )
-                              },
-                            },
-                          },
-                          [
-                            _c("span", { attrs: { "aria-hidden": "true" } }, [
-                              _vm._v("»"),
-                            ]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "visually-hidden" }, [
-                              _vm._v("Next"),
-                            ]),
+                              [
+                                _c(
+                                  "span",
+                                  { attrs: { "aria-hidden": "true" } },
+                                  [_vm._v("«")]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "visually-hidden" }, [
+                                  _vm._v("Previous"),
+                                ]),
+                              ]
+                            ),
                           ]
                         ),
-                      ]
+                        _vm._v(" "),
+                        _vm._l(_vm.postResponse.last_page, function (page_num) {
+                          return _c(
+                            "li",
+                            {
+                              key: page_num,
+                              class:
+                                page_num == _vm.postResponse.current_page
+                                  ? "page-item active"
+                                  : "page-item",
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.getPosts(page_num)
+                                    },
+                                  },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(page_num) +
+                                      "\n                  "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            class:
+                              _vm.postResponse.current_page ==
+                              _vm.postResponse.last_page
+                                ? "disabled page-item"
+                                : "page-item",
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "page-link",
+                                attrs: { href: "#", "aria-label": "Next" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.getPosts(
+                                      _vm.postResponse.current_page + 1
+                                    )
+                                  },
+                                },
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  { attrs: { "aria-hidden": "true" } },
+                                  [_vm._v("»")]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "visually-hidden" }, [
+                                  _vm._v("Next"),
+                                ]),
+                              ]
+                            ),
+                          ]
+                        ),
+                      ],
+                      2
                     ),
-                  ],
-                  2
+                  ]),
+                ]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "aside",
+            { staticClass: "col-12 col-md-3 bg-info text-center py-5" },
+            [
+              _c("div", { staticClass: "categories mb-5" }, [
+                _c("h2", [_vm._v("Categories")]),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  { staticClass: "list-unstyled" },
+                  _vm._l(_vm.categories, function (category) {
+                    return _c("li", { key: category.id }, [
+                      _vm._v(_vm._s(category.name)),
+                    ])
+                  }),
+                  0
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tags" }, [
+                _c("h2", [_vm._v("Tags")]),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  { staticClass: "list-unstyled" },
+                  _vm._l(_vm.tags, function (tag) {
+                    return _c("li", { key: tag.id }, [
+                      _vm._v("# " + _vm._s(tag.name)),
+                    ])
+                  }),
+                  0
                 ),
               ]),
             ]
           ),
         ]),
       ]),
-      _vm._v(" "),
-      _vm._m(0),
     ],
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("aside", [_c("div", { staticClass: "categories" })])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -54118,7 +54227,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\LARAVEL\laravel-many-to-many\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\LARAVEL\laravel-api\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
